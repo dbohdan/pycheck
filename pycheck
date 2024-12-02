@@ -2,9 +2,45 @@
 # Requires `uv`.
 
 python_target_version=3.11
-python_target_version_ruff=py$(echo "$python_target_version" | sed 's|\.||')
+version=0.1.0
+
+help() {
+    cat <<EOF
+Usage: $(basename "$0") [-h] [-V] [-t <version>] [file ...]
+
+Options:
+  -t, --target-version <version>
+          The target version of Python (default: '$python_target_version')
+EOF
+}
+
+for arg in "$@"; do
+    case "$arg" in
+    -h | --help)
+        help
+        exit 0
+        ;;
+    -t | --target-version)
+        shift
+        python_target_version=$1
+        shift
+        ;;
+    -V | --version)
+        printf '%s\n' "$version"
+        exit 0
+        ;;
+    -*)
+        printf 'unknown option: %s\n' "$arg" >&2
+        exit 2
+        ;;
+    *)
+        break
+        ;;
+    esac
+done
 
 exit_status=0
+python_target_version_ruff=py$(printf '%s\n' "$python_target_version" | sed 's|\.||')
 
 uv tool run ruff format \
     --no-cache \
