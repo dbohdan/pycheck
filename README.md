@@ -14,8 +14,9 @@ A system that can run uv and POSIX shell scripts.
 
 ## Installation
 
-First, install uv.
-Assuming you have `~/.local/bin/` directory in `PATH`, run the following commands:
+First, [install uv](https://github.com/astral-sh/uv#installation).
+
+Assuming you have the directory `~/.local/bin/` in `PATH`, run the following commands:
 
 ```shell
 uv run --with 'httpx[cli]' httpx --download pycheck https://raw.githubusercontent.com/dbohdan/pycheck/refs/heads/master/pycheck
