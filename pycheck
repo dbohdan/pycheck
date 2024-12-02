@@ -9,11 +9,11 @@
 # Requires `uv` to be available.
 
 python_target_version=3.10
-version=0.1.0
+version=0.1.1
 
 help() {
     cat <<EOF
-Usage: $(basename "$0") [-h] [-V] [-t <version>] [file ...]
+Usage: $(basename "$0") [-h] [-V] [-t <version>] file [file ...]
 
 Options:
   -t, --target-version <version>
@@ -45,6 +45,11 @@ for arg in "$@"; do
         ;;
     esac
 done
+
+if [ $# -eq 0 ]; then
+    printf 'no files given\n' >&2
+    exit 2
+fi
 
 exit_status=0
 python_target_version_ruff=py$(printf '%s\n' "$python_target_version" | sed 's|\.||')
