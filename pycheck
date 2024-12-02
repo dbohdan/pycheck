@@ -33,6 +33,18 @@ Options:
 EOF
 }
 
+exit_if_no_value() {
+    option=$1
+    shift
+
+    if [ $# -ge 1 ]; then
+        return
+    fi
+
+    printf 'no value for option %s\n' "$option" >&2
+    exit 2
+}
+
 fix_option=
 ignore_option=ANN,D,EXE003,PT,S101,S310,S603,S607,T201
 target_version_option=3.10
@@ -40,7 +52,9 @@ unsafe_fixes_option=
 version=0.2.0
 
 while :; do
-    case "$1" in
+    arg=$1
+
+    case "$arg" in
     -f | --fix)
         fix_option=--fix
         shift
@@ -51,11 +65,13 @@ while :; do
         ;;
     -i | --ignore)
         shift
+        exit_if_no_value "$arg" "$@"
         ignore_option=$1
         shift
         ;;
     -t | --target-version)
         shift
+        exit_if_no_value "$arg" "$@"
         target_version_option=$1
         shift
         ;;
