@@ -1,0 +1,32 @@
+#! /bin/sh
+
+python_version=3.11
+python_version_ruff=py$(echo "$python_version" | sed 's|\.||')
+
+exit_status=0
+
+ruff format \
+    --no-cache \
+    --target-version "$python_version_ruff" \
+    "$@" \
+    ;
+exit_status=$((exit_status + $?))
+
+ruff check \
+    --fix \
+    --ignore ANN,D,EXE003,S101,S310,S603,S607,T201,PT \
+    --no-cache \
+    --select ALL \
+    --target-version "$python_version_ruff" \
+    --unsafe-fixes \
+    "$@" \
+    ;
+exit_status=$((exit_status + $?))
+
+pyright \
+    --pythonversion "$python_version" \
+    "$@" \
+    ;
+exit_status=$((exit_status + $?))
+
+exit "$exit_status"
