@@ -8,12 +8,9 @@
 #
 # Requires `uv` to be available.
 
-python_target_version=3.10
-version=0.1.1
-
 help() {
     cat <<EOF
-Usage: $(basename "$0") [-h] [-V] [-t <version>] file [file ...]
+Usage: $(basename "$0") [-h] [-V] [-f] [-t <version>] [-u] file [file ...]
 
 Options:
   -h, --help
@@ -22,13 +19,28 @@ Options:
   -V, --version
           Print version number and exit
 
+  -f, --fix
+          Apply Ruff Linter fixes
+
   -t, --target-version <version>
           The target version of Python (default: '$python_target_version')
+
+  -u, --unsafe-fixes
+          Apply unsafe Ruff Linter fixes
 EOF
 }
 
+fix_option=
+python_target_version=3.10
+unsafe_fixes_option=
+version=0.2.0
+
 for arg in "$@"; do
     case "$arg" in
+    -f | --fix)
+        fix_option=--fix
+        shift
+        ;;
     -h | --help)
         help
         exit 0
@@ -36,6 +48,10 @@ for arg in "$@"; do
     -t | --target-version)
         shift
         python_target_version=$1
+        shift
+        ;;
+    -u | --unsafe-fixes)
+        unsafe_fixes_option=--unsafe-fixes
         shift
         ;;
     -V | --version)
@@ -68,12 +84,12 @@ uv tool run ruff format \
 exit_status=$((exit_status + $?))
 
 uv tool run ruff check \
-    --fix \
+    $fix_option \
     --ignore ANN,D,EXE003,S101,S310,S603,S607,T201,PT \
     --no-cache \
     --select ALL \
     --target-version "$python_target_version_ruff" \
-    --unsafe-fixes \
+    $unsafe_fixes_option \
     "$@" \
     ;
 exit_status=$((exit_status + $?))

@@ -27,7 +27,7 @@ mv pycheck ~/.local/bin/
 ## Usage
 
 ```none
-Usage: pycheck [-h] [-V] [-t <version>] file [file ...]
+Usage: pycheck [-h] [-V] [-f] [-t <version>] [-u] file [file ...]
 
 Options:
   -h, --help
@@ -36,8 +36,14 @@ Options:
   -V, --version
           Print version number and exit
 
+  -f, --fix
+          Apply Ruff Linter fixes
+
   -t, --target-version <version>
           The target version of Python (default: '3.10')
+
+  -u, --unsafe-fixes
+          Apply unsafe Ruff Linter fixes
 ```
 
 ## License
