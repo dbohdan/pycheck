@@ -10,7 +10,7 @@
 
 help() {
     cat <<EOF
-Usage: $(basename "$0") [-h] [-V] [-f] [-t <version>] [-u] file [file ...]
+Usage: $(basename "$0") [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u] file [file ...]
 
 Options:
   -h, --help
@@ -22,8 +22,11 @@ Options:
   -f, --fix
           Apply Ruff Linter fixes
 
+  -i, --ignore <rules>
+          Ruff Linter rules to ignore (default: '$ignore_option')
+
   -t, --target-version <version>
-          The target version of Python (default: '$python_target_version')
+          The target version of Python (default: '$target_version_option')
 
   -u, --unsafe-fixes
           Apply unsafe Ruff Linter fixes
@@ -31,7 +34,8 @@ EOF
 }
 
 fix_option=
-python_target_version=3.10
+ignore_option=ANN,D,EXE003,PT,S101,S310,S603,S607,T201
+target_version_option=3.10
 unsafe_fixes_option=
 version=0.2.0
 
@@ -45,9 +49,14 @@ for arg in "$@"; do
         help
         exit 0
         ;;
+    -i | --ignore)
+        shift
+        ignore_option=$1
+        shift
+        ;;
     -t | --target-version)
         shift
-        python_target_version=$1
+        target_version_option=$1
         shift
         ;;
     -u | --unsafe-fixes)
@@ -74,28 +83,28 @@ if [ $# -eq 0 ]; then
 fi
 
 exit_status=0
-python_target_version_ruff=py$(printf '%s\n' "$python_target_version" | sed 's|\.||')
+target_version_option_ruff=py$(printf '%s\n' "$target_version_option" | sed 's|\.||')
 
 uv tool run ruff format \
     --no-cache \
-    --target-version "$python_target_version_ruff" \
+    --target-version "$target_version_option_ruff" \
     "$@" \
     ;
 exit_status=$((exit_status + $?))
 
 uv tool run ruff check \
     $fix_option \
-    --ignore ANN,D,EXE003,S101,S310,S603,S607,T201,PT \
+    --ignore "$ignore_option" \
     --no-cache \
     --select ALL \
-    --target-version "$python_target_version_ruff" \
+    --target-version "$target_version_option_ruff" \
     $unsafe_fixes_option \
     "$@" \
     ;
 exit_status=$((exit_status + $?))
 
 uv tool run pyright \
-    --pythonversion "$python_target_version" \
+    --pythonversion "$target_version_option" \
     "$@" \
     ;
 exit_status=$((exit_status + $?))

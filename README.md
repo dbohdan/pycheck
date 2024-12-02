@@ -27,7 +27,7 @@ mv pycheck ~/.local/bin/
 ## Usage
 
 ```none
-Usage: pycheck [-h] [-V] [-f] [-t <version>] [-u] file [file ...]
+Usage: pycheck [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u] file [file ...]
 
 Options:
   -h, --help
@@ -38,6 +38,9 @@ Options:
 
   -f, --fix
           Apply Ruff Linter fixes
+
+  -i, --ignore <rules>
+          Ruff Linter rules to ignore (default: 'ANN,D,EXE003,PT,S101,S310,S603,S607,T201')
 
   -t, --target-version <version>
           The target version of Python (default: '3.10')
