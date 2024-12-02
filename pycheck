@@ -1,5 +1,11 @@
 #! /bin/sh
-# Requires `uv`.
+# pycheck - Run Ruff and Pyright with uv to format, lint, and type-check
+# standalone Python scripts.
+#
+# Copyright (c) 2024 D. Bohdan.
+# License: MIT.
+#
+# Requires `uv` to be available.
 
 python_target_version=3.10
 version=0.1.0
