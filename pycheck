@@ -1,19 +1,19 @@
 #! /bin/sh
-# Requires `uvx`.
+# Requires `uv`.
 
 python_target_version=3.11
 python_target_version_ruff=py$(echo "$python_target_version" | sed 's|\.||')
 
 exit_status=0
 
-uvx ruff format \
+uv tool run ruff format \
     --no-cache \
     --target-version "$python_target_version_ruff" \
     "$@" \
     ;
 exit_status=$((exit_status + $?))
 
-uvx ruff check \
+uv tool run ruff check \
     --fix \
     --ignore ANN,D,EXE003,S101,S310,S603,S607,T201,PT \
     --no-cache \
@@ -24,7 +24,7 @@ uvx ruff check \
     ;
 exit_status=$((exit_status + $?))
 
-uvx pyright \
+uv tool run pyright \
     --pythonversion "$python_target_version" \
     "$@" \
     ;
