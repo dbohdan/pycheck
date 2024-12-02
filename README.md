@@ -23,6 +23,22 @@ chmod +x pycheck
 mv pycheck ~/.local/bin/
 ```
 
+## Usage
+
+```none
+Usage: pycheck [-h] [-V] [-t <version>] file [file ...]
+
+Options:
+  -h, --help
+          Print this help message and exit
+
+  -V, --version
+          Print version number and exit
+
+  -t, --target-version <version>
+          The target version of Python (default: '3.10')
+```
+
 ## License
 
 MIT.
