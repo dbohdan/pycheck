@@ -16,6 +16,12 @@ help() {
 Usage: $(basename "$0") [-h] [-V] [-t <version>] file [file ...]
 
 Options:
+  -h, --help
+          Print this help message and exit
+
+  -V, --version
+          Print version number and exit
+
   -t, --target-version <version>
           The target version of Python (default: '$python_target_version')
 EOF
