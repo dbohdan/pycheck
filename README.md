@@ -19,6 +19,7 @@ Assuming you have `~/.local/bin/` directory in `PATH`, run the following command
 
 ```shell
 uv run --with 'httpx[cli]' httpx --download pycheck https://raw.githubusercontent.com/dbohdan/pycheck/refs/heads/master/pycheck
+chmod +x pycheck
 mv pycheck ~/.local/bin/
 ```
 
