@@ -39,8 +39,8 @@ target_version_option=3.10
 unsafe_fixes_option=
 version=0.2.0
 
-for arg in "$@"; do
-    case "$arg" in
+while :; do
+    case "$1" in
     -f | --fix)
         fix_option=--fix
         shift
@@ -68,7 +68,7 @@ for arg in "$@"; do
         exit 0
         ;;
     -*)
-        printf 'unknown option: %s\n' "$arg" >&2
+        printf 'unknown option: %s\n' "$1" >&2
         exit 2
         ;;
     *)
