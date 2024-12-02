@@ -43,7 +43,7 @@ Options:
           Ruff Linter rules to ignore (default: 'ANN,D,EXE003,PT,S101,S310,S603,S607,T201')
 
   -t, --target-version <version>
-          The target version of Python (default: '3.10')
+          Target Python version (default: '3.10')
 
   -u, --unsafe-fixes
           Apply unsafe Ruff Linter fixes

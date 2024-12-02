@@ -26,7 +26,7 @@ Options:
           Ruff Linter rules to ignore (default: '$ignore_option')
 
   -t, --target-version <version>
-          The target version of Python (default: '$target_version_option')
+          Target Python version (default: '$target_version_option')
 
   -u, --unsafe-fixes
           Apply unsafe Ruff Linter fixes
