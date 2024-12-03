@@ -7,6 +7,7 @@ and
 using
 [uv](https://github.com/astral-sh/uv)
 to format, lint, and type-check (in that order) your standalone Python scripts.
+It doesn't require a project and doesn't create cache directories like `.ruff_cache`.
 
 ## Requirements
 
