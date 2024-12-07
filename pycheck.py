@@ -11,6 +11,7 @@ See https://github.com/dbohdan/pycheck for more information.
 """
 
 import argparse
+import contextlib
 import subprocess as sp
 import sys
 
@@ -75,7 +76,7 @@ def cli() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main() -> None:
+def run() -> None:
     args = cli()
 
     target_version_ruff = f"py{args.target_version.replace('.', '')}"
@@ -133,6 +134,11 @@ def main() -> None:
         status = max(status, result.returncode)
 
     sys.exit(status)
+
+
+def main() -> None:
+    with contextlib.suppress(KeyboardInterrupt):
+        run()
 
 
 if __name__ == "__main__":
