@@ -1,7 +1,7 @@
 PYTHON_VERSION := 3.10
 
 .PHONY: default
-default: check test
+default: check
 
 .PHONY: check
 check:
