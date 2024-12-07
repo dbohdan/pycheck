@@ -11,20 +11,17 @@ It doesn't require a project and doesn't create cache directories like `.ruff_ca
 
 ## Requirements
 
-A system that can run uv.
-As of late 2024, this means Linux, macOS, or Windows.
+You will need uv.
+As of late 2024, it supports Linux, macOS, and Windows.
 See [platform support](https://docs.astral.sh/uv/reference/policies/platforms/) for uv.
 
 ## Installation
 
 First, [install uv](https://github.com/astral-sh/uv#installation).
-
-Assuming you have the directory `~/.local/bin/` in `PATH`, run the following commands:
+Once it is installed, run the following command:
 
 ```shell
-uv run --with 'httpx[cli]' httpx --download pycheck https://raw.githubusercontent.com/dbohdan/pycheck/refs/heads/master/pycheck.py
-chmod +x pycheck
-mv pycheck ~/.local/bin/
+uv tool install git+https://github.com/dbohdan/pycheck@master
 ```
 
 ## Usage
