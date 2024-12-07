@@ -3,6 +3,9 @@ PYTHON_VERSION := 3.10
 .PHONY: default
 default: check
 
+.PHONY: all
+all: check test
+
 .PHONY: check
 check:
 	uv run --python $(PYTHON_VERSION) pycheck.py pycheck.py test_pycheck.py
