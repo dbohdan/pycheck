@@ -3,12 +3,16 @@
 import os
 import shlex
 import subprocess as sp
+import sys
 import unittest
 from pathlib import Path
 
 DIR = Path(__file__).parent
-PYCHECK_COMMAND = shlex.split(os.getenv("PYCHECK_COMMAND", "./pycheck"))
 PYTHON_TARGET_VERSION = "3.10"
+
+PYCHECK_COMMAND = shlex.split(os.getenv("PYCHECK_COMMAND", ""))
+if not PYCHECK_COMMAND:
+    PYCHECK_COMMAND = [sys.executable, "pycheck.py"]
 
 
 def pycheck(*args: str) -> sp.CompletedProcess:
@@ -27,22 +31,22 @@ class TestPycheck(unittest.TestCase):
     def test_help(self) -> None:
         result = pycheck("-h")
         self.assertEqual(result.returncode, 0)
-        self.assertIn("Usage:", result.stdout)
+        self.assertIn("usage:", result.stdout)
 
     def test_version(self) -> None:
         result = pycheck("-V")
         self.assertEqual(result.returncode, 0)
-        self.assertIn("0.2.0", result.stdout)
+        self.assertRegex(result.stdout, r"^\d.\d+.\d+")
 
     def test_no_files(self) -> None:
         result = pycheck()
         self.assertEqual(result.returncode, 2)
-        self.assertIn("no files given", result.stderr)
+        self.assertIn("arguments are required: file", result.stderr)
 
     def test_unknown_option(self) -> None:
-        result = pycheck("--unknown-option")
+        result = pycheck("--unknown-option", "foo.py")
         self.assertEqual(result.returncode, 2)
-        self.assertIn("unknown option", result.stderr)
+        self.assertIn("unrecognized arguments", result.stderr)
 
     def test_ignore_option(self) -> None:
         result = pycheck("-i", "ALL", "test_pycheck.py")
