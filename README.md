@@ -28,7 +28,7 @@ mv pycheck ~/.local/bin/
 ## Usage
 
 ```none
-Usage: pycheck [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u] file [file ...]
+Usage: pycheck [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u] [--] file [file ...]
 
 Options:
   -h, --help

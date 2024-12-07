@@ -10,7 +10,8 @@
 
 help() {
     cat <<EOF
-Usage: $(basename "$0") [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u] file [file ...]
+Usage: $(basename "$0") [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u] \
+[--] file [file ...]
 
 Options:
   -h, --help
@@ -82,6 +83,10 @@ while :; do
     -V | --version)
         printf '%s\n' "$version"
         exit 0
+        ;;
+    --)
+        shift
+        break
         ;;
     -*)
         printf 'unknown option: %s\n' "$1" >&2
