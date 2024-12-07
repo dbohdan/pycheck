@@ -12,6 +12,10 @@ It doesn't require a project and doesn't create cache directories like `.ruff_ca
 ## Requirements
 
 A system that can run uv and POSIX shell scripts.
+As of late 2024, this means Linux, macOS, or Windows.
+See [platform support](https://docs.astral.sh/uv/reference/policies/platforms/) for uv.
+
+You can run pycheck with [BusyBox for Windows](https://frippery.org/busybox/).
 
 ## Installation
 
