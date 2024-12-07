@@ -1,0 +1,14 @@
+[project]
+name = "pycheck"
+version = "0.3.0"
+description = "Format, lint, and type-check standalone Python scripts using uv"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+pycheck = 'pycheck:main'
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
