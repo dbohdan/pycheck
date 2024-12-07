@@ -1,18 +1,19 @@
 #! /usr/bin/env python3
 
 import os
+import shlex
 import subprocess as sp
 import unittest
 from pathlib import Path
 
 DIR = Path(__file__).parent
+PYCHECK_COMMAND = shlex.split(os.getenv("PYCHECK_COMMAND", "./pycheck"))
 PYTHON_TARGET_VERSION = "3.10"
-SCRIPT = os.getenv("PYCHECK", "./pycheck")
 
 
 def pycheck(*args: str) -> sp.CompletedProcess:
     return sp.run(
-        [SCRIPT, *args],
+        [*PYCHECK_COMMAND, *args],
         check=False,
         capture_output=True,
         text=True,
