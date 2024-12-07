@@ -1,4 +1,6 @@
-#! /usr/bin/env -S uv run --no-project --python 3.10
+#! /bin/sh
+"exec" "uv" "run" "--no-project" "--python" "${PYTHON_VERSION:-3.10}" "$0" "$@"
+
 """
 pycheck - Run Ruff and Pyright with uv to format, lint, and type-check
 standalone Python scripts.

@@ -5,7 +5,8 @@ default: check test
 
 .PHONY: check
 check:
-	uv run --python $(PYTHON_VERSION) pycheck.py pycheck.py test_pycheck.py
+	uv run --python $(PYTHON_VERSION) pycheck.py --ignore +E402,ISC001 pycheck.py test_pycheck.py
+	uv run --python $(PYTHON_VERSION) pycheck.py test_pycheck.py
 
 .PHONY: test
 test:
