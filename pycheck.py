@@ -123,7 +123,7 @@ def main() -> None:
     status = 0
     for command in (ruff_format_command, ruff_check_command, pyright_command):
         result = sp.run(command, check=False)
-        status = status + result.returncode
+        status = max(status, result.returncode)
 
     sys.exit(status)
 
