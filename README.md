@@ -44,7 +44,7 @@ options:
   -f, --fix             apply Ruff Linter fixes
   -i <rules>, --ignore <rules>
                         Ruff Linter rules to ignore (default:
-'ANN,D,EXE003,PT,S101,S310,S603,S607,T201')
+'ANN,D,EXE003,PT,S101,S310,S603,S607,T201'; '+...' to add)
   -t <version>, --target-version <version>
                         target Python version (default: '3.10')
   -u, --unsafe-fixes    apply unsafe Ruff Linter fixes

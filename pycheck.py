@@ -45,7 +45,7 @@ def cli() -> argparse.Namespace:
         "--ignore",
         default=DEFAULT_IGNORE_RULES,
         metavar="<rules>",
-        help="Ruff Linter rules to ignore (default: %(default)r)",
+        help="Ruff Linter rules to ignore (default: %(default)r; '+...' to add)",
     )
 
     parser.add_argument(
@@ -90,6 +90,11 @@ def main() -> None:
         *args.files,
     ]
 
+    ignore = (
+        DEFAULT_IGNORE_RULES + "," + args.ignore[1:]
+        if args.ignore.startswith("+")
+        else args.ignore
+    )
     ruff_check_command = [
         "uv",
         "tool",
@@ -97,7 +102,7 @@ def main() -> None:
         "ruff",
         "check",
         "--ignore",
-        args.ignore,
+        ignore,
         "--no-cache",
         "--select",
         "ALL",
