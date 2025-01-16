@@ -27,8 +27,7 @@ uv tool install git+https://github.com/dbohdan/pycheck@master
 ## Usage
 
 ```none
-usage: pycheck.py [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u]
-                  file [file ...]
+usage: pycheck [-h] [-V] [-f] [-i <rules>] [-t <version>] [-u] file [file ...]
 
 Run Ruff and Pyright with uv to format, lint, and type-check Python scripts.
 
